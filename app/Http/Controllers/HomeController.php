@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\SubscribeRequest;
 use App\Subscription;
+use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
@@ -56,5 +57,19 @@ class HomeController extends Controller
             return view('page', compact('token'));
 
         return abort(403);
+    }
+
+    public function unsubscribe(Request $request)
+    {
+        //TODO:: need use email also for unsubscribe (for security)
+        $subscription = $this->subscriptionModel->byToken($request->get('token'))->first();
+
+        if(empty($subscription))
+            return abort(404);
+
+        $subscription->update(['is_active' => 0]);
+
+        return redirect('home');
+
     }
 }

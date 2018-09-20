@@ -10,16 +10,13 @@
                     <p><a href="#">Some file</a></p>
                 </div>
                 <div class="card-footer">
-                    <form action="{{route('subscribe')}}" type="DELETE" class="form-inline">
+                    <form action="{{route('subscribe.delete')}}" class="form-inline" method="POST">
+                        @method("DELETE")
+                        @csrf
                         <input type="hidden" name="token" value="{{$token}}">
-                        <div class="form-group">
-                            <input type="email" name="email" id="email" value="" autocomplete="off" class="form-control"
-                            placeholder="Email">
-                        </div>
                         <div class="form-group">
                             <input type="submit" class="btn btn-danger" value="Unsubscribe">
                         </div>
-
                     </form>
                 </div>
 
