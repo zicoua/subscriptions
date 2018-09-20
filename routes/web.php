@@ -14,3 +14,13 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+Route::post('/subscribe', 'HomeController@subscribe')->name('subscribe');
+Route::delete('/subscribe', 'HomeController@subscribe')->name('subscribe.delete');
+
+Route::get('/page/{token}', 'HomeController@page')->name('page');
+
+
