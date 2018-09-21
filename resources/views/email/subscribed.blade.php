@@ -1,0 +1,1 @@
+<a href="{{route('page', ['token' => $token])}}">{{route('page', ['token' => $token])}}</a>

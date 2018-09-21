@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\File;
 use App\Http\Requests\SubscribeRequest;
+use App\Mail\Subscribed;
 use App\Subscription;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class HomeController extends Controller
 {
@@ -43,6 +45,9 @@ class HomeController extends Controller
             ->generateToken()
             ->setExpiredDate()
             ->save();
+
+        $subscription->files()->save(factory(File::class)->make()); // make file for subscription
+        Mail::to($request->get('email'))->send(new Subscribed($subscription));
 
         session()->flash('token', $subscription->token);
 
@@ -83,6 +88,6 @@ class HomeController extends Controller
 
         $subscription->update(['is_active' => 0]);
 
-        return redirect('home');
+        return redirect('');
     }
 }

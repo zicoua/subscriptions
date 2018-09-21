@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Rules\MaxSubscriptions;
 use Illuminate\Foundation\Http\FormRequest;
 
 class SubscribeRequest extends FormRequest
@@ -25,7 +26,7 @@ class SubscribeRequest extends FormRequest
     {
         return [
             'name' => 'required',
-            'email' => 'required|email'
+            'email' => ['required', 'email', new MaxSubscriptions]
         ];
     }
 }
