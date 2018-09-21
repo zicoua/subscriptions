@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\File;
 use App\Http\Requests\SubscribeRequest;
 use App\Subscription;
 use Illuminate\Http\Request;
@@ -53,10 +54,23 @@ class HomeController extends Controller
     {
         $subscription = $this->subscriptionModel->byToken($token)->first();
 
-        if($subscription && $subscription->can_access)
-            return view('page', compact('token'));
+        if($subscription && $subscription->can_access){
+            $subscription->updateFileTokens();
+
+            return view('page', compact('subscription'));
+        }
 
         return abort(403);
+    }
+
+    public function file($token, File $fileModel)
+    {
+        $file = $fileModel->byToken($token)->first();
+
+        if(!$file)
+            return abort(403);
+
+        return view('file', compact('file'));
     }
 
     public function unsubscribe(Request $request)
@@ -70,6 +84,5 @@ class HomeController extends Controller
         $subscription->update(['is_active' => 0]);
 
         return redirect('home');
-
     }
 }

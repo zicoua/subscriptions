@@ -47,4 +47,17 @@ class Subscription extends Model
 
         return $query->where('token', $token);
     }
+
+    public function files(){
+
+        return $this->hasMany(File::class);
+    }
+
+    public function updateFileTokens(){
+        // not best way but very simple. For one file per subscription it's ok
+        //TODO: Need try to use cache
+        $this->files()->get()->map(function($file){
+            $file->generateToken()->save();
+        });
+    }
 }

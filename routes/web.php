@@ -18,6 +18,7 @@ Route::post('/subscribe', 'HomeController@subscribe')->name('subscribe');
 Route::delete('/subscribe', 'HomeController@unsubscribe')->name('subscribe.delete');
 
 Route::get('/page/{token}', 'HomeController@page')->name('page');
+Route::get('/file/{token}', 'HomeController@file')->name('file');
 
 
 Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'auth'], function() {
