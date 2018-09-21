@@ -6,3 +6,5 @@
 
 <p>Admin panel: /admin</p>
 <p>Login(user in seeder): admin@example.com / password</p>
+
+<p>You can change some configs in config/subscriptions.php</p>
