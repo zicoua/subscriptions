@@ -23,7 +23,7 @@
                                 <td>{{$subscription->created_at}}</td>
                                 <td>{{$subscription->expired_at}}</td>
                                 <td>
-                                    <a href="{{route('admin.subscription.edit', ['id' => $subscription->id])}}">Edit</a> <br>
+                                    <a href="{{route('admin.subscription.edit', ['id' => $subscription->id])}}">Edit</a> |
                                     <a href="{{route('admin.subscription.delete', ['id' => $subscription->id])}}" class="delete-subscription">Remove</a>
                                 </td>
                             </tr>
